@@ -1,0 +1,39 @@
+MIT License
+
+Copyright (c) 2026 wings-of-liberty-zdy
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+---
+
+本授权仅覆盖本仓库的插件源代码、翻译文本与工具脚本。
+
+不覆盖以下第三方组件，它们各自遵循自己的授权：
+
+* Fusion Pixel 12px 字体（plugin/PunkCn/Resources/pixel-cn.ttf 为其子集）
+  Copyright (c) 2022, TakWolf (https://takwolf.com)
+  SIL Open Font License 1.1
+  https://github.com/TakWolf/fusion-pixel-font/blob/master/LICENSE-OFL
+  本仓库按 OFL 允许的方式做了子集化裁剪，保留原始版权声明与许可证全文。
+
+* BepInEx 5（打包时引入，不随本仓库分发）
+  LGPL-2.1  https://github.com/BepInEx/BepInEx
+
+游戏 PUNK 的一切版权归其开发者所有。本补丁为爱好者制作，仅供学习交流，
+请勿用于商业用途；请先购买正版游戏。

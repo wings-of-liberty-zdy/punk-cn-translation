@@ -1,0 +1,36 @@
+# 不翻译的内部资产名。一行一个。
+# 判据（来自 data/dump/q2_weaponmodule_instances.json 的引用图分析）：
+#   icon 字段为空，且只被 Enemy.primaryWeapon 与 ModuleRegistry 引用。
+#   这些名字唯一的 TMP 出口是开发者调试菜单，玩家看不到。
+#   有 icon 的 22 条才是商店与配装界面显示的，必须翻译。
+Crawler Laser
+Weapon CrossPin
+Weapon Drone
+Weapon Enemy Drone Sniper
+Weapon Enemy DroneMissile
+Weapon Enemy Queen Bomb
+Weapon Fish
+Weapon FloaterMiniCaps
+Weapon Laser CrossTablet
+Weapon Minion CrossRed
+Weapon Rocket Rookie
+Weapon Rocket Soldier
+Weapon Rocket TurretSeeker
+Weapon_Bouncer
+Weapon_Cross
+Weapon_CrossAlpha
+Weapon_CrossLaser
+Weapon_CrossQueen
+Weapon_CrossRed
+Weapon_Fly
+Weapon_Fly_Alfa
+Weapon_Fly_Dad
+Weapon_Fly_Laser
+Weapon_Grunt
+Weapon_Laser_CrossQueen
+Weapon_Minion_CrossQueen
+Weapon_PhantomDrone
+Weapon_Raven
+Weapon_Turret_Laser
+Weapon_Turret_Worm
+Weapon_Zipper

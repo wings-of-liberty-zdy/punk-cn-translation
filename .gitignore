@@ -1,0 +1,22 @@
+# 构建产物
+bin/
+obj/
+dist/
+
+# 第三方二进制：体积大，按 README「从源码构建」一节自行下载
+vendor/
+
+# 反编译与勘查的中间产物（可用 tools/extract.py 重新生成）
+data/
+
+# 游戏日志
+*.log
+*.log.bak
+Player-prev.log
+
+# 编辑器 / 系统
+.vs/
+.idea/
+*.user
+Thumbs.db
+desktop.ini

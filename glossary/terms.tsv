@@ -1,0 +1,107 @@
+# PUNK 汉化术语表
+# 三列：英文 / 中文 / 备注。制表符分隔。
+# 同一件事在全文里必须用同一个词。翻译前先读这张表。
+#
+# 保留英文的 8 个 HUD 资源名不列在这里 —— 见 style-guide.md 第 6 节。
+
+module	模块	核心玩法单位
+modules	模块	
+weapon mod	武器改装	
+weapon mods	武器改装	
+slot	插槽	
+slots	插槽	
+grid	网格	
+connection	连接	
+power core	能量核心	
+booster core	增幅核心	
+booster	增幅器	
+boosters	增幅器	
+core	核心	
+upgrade	升级	
+upgrades	升级	
+passive module	被动模块	
+active module	主动模块	
+drone	无人机	
+drones	无人机	
+minion	仆从	
+spawn	生成	动词，指造出单位
+turret	炮塔	
+boss	首领	
+enemy	敌人	
+enemies	敌人	
+ship	飞船	
+station	空间站	
+scanner	扫描仪	
+map	地图	
+location	地点	
+decode	解码	
+travel	前往	
+scan	扫描	
+activate	激活	
+pick up	拾取	
+item	物品	
+items	物品	
+ingredient	材料	
+consumable	消耗品	
+gadget	装置	
+gadgets	装置	
+vault	仓库	
+loadout	配装	
+run	一局	roguelike 的一轮
+daily challenge	每日挑战	
+meta progress	永久进度	
+highscores	排行榜	
+leaderboard	排行榜	
+shield	护盾	
+regen	回复	regeneration
+regenerates	回复	
+capacity	上限	
+maximum	最大	
+projectile	弹丸	
+projectiles	弹丸	
+fire rate	射速	
+firerate	射速	
+spread	散布	
+range	射程	
+impact	命中	
+burn	燃烧	
+explosion	爆炸	
+explode	爆炸	
+explodes	爆炸	
+cluster	集束	
+homing	追踪	
+piercing	穿透	
+gravity	重力	
+detonate	引爆	
+detonates	引爆	
+deploy	部署	
+deploys	部署	
+ignite	点燃	
+igniting	点燃	
+zap	电击	
+zaps	电击	
+electrocute	电击	
+mine	地雷	
+mines	地雷	
+missile	导弹	
+missiles	导弹	
+laser	激光	
+crystal	水晶	
+orb	光球	
+damage	伤害	
+health	生命值	不是资源名时用这个
+blast radius	爆炸范围	
+range	射程	
+short range	短程	
+long range	远程	
+single player	单人游戏	
+co-op	双人合作	
+demo	试玩版	
+wishlist	加入愿望单	
+pause menu	暂停菜单	
+controls	操作	
+input	输入	
+assign input	分配输入	
+player	玩家	
+P1	玩家 1	
+P2	玩家 2	

@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8">
+<title>PUNK 汉化补丁计划</title>
+<link rel="stylesheet" href="../../../../.agents/skills/html-plan/runtime/htmlplan.css">
+<script src="../../../../.agents/skills/html-plan/runtime/htmlplan.js" defer></script>
+<style data-mock-shared>
+  .ui { font: 14px/1.45 "Segoe UI", "Microsoft YaHei", sans-serif; color: #1c1b19; background: #fff; border: 1px solid #ddd8cc; border-radius: 10px; overflow: hidden; }
+  .ui .hd { padding: 9px 14px; border-bottom: 1px solid #eee9dd; font-weight: 650; display: flex; gap: 8px; align-items: baseline; } .ui .hd small { color: #8a8578; font-weight: 400; }
+  .ui .row { display: grid; grid-template-columns: 1fr auto; gap: 3px 12px; padding: 9px 14px; border-bottom: 1px solid #f3efe6; }
+  .ui .row small { color: #8a8578; grid-column: 1 / -1; }
+  .ui .k { color: #8a8578; font-size: 12px; letter-spacing: .04em; text-transform: uppercase; padding: 10px 14px 2px; }
+  .ui .on { background: #f6f2e9; }
+  .ui .px { font-family: "Zpix", "Fusion Pixel 12px", monospace; image-rendering: pixelated; font-size: 13px; }
+  .ui .blk { display: inline-block; width: 13px; height: 13px; background: #c9c3b4; border-radius: 2px; vertical-align: -2px; }
+  .ui .btn { font-weight: 600; font-size: 12.5px; padding: 6px 11px; border-radius: 7px; border: 1px solid #ddd8cc; background: #fff; }
+  .ui .chip { font-size: 12px; padding: 3px 9px; border: 1px solid #ddd8cc; border-radius: 999px; color: #5f5a4f; }
+  .ui .chip.on { background: #f6ede9; border-color: #e0c9bc; color: #b4541f; font-weight: 600; }
+  .ui .bar { padding: 9px 14px; display: flex; gap: 6px; flex-wrap: wrap; }
+  .ui .ft { padding: 10px 14px; border-top: 1px solid #eee9dd; background: #faf8f3; display: flex; gap: 8px; align-items: center; }
+</style>
+<body>
+
+<header>
+  <h1>PUNK 试玩版汉化补丁</h1>
+  <doc-changes new="19"></doc-changes>
+  <details class="thread"><summary>为什么 · 3 条原话</summary>
+    <doc-quote via="prompt" from="用户">这个项目的目的是想要给steam游戏punk做中文</doc-quote>
+    <doc-quote via="prompt" from="用户">就是punk playtest,这个游戏现在只有试玩版,没有正式版</doc-quote>
+    <doc-quote via="prompt" from="用户">如果在游戏菜单里面加上语言切换很麻烦,那么就先做简单的,后续再加装</doc-quote>
+  </details>
+</header>
+
+<main>
+<doc-plan>
+
+<!-- ═════ 1 ═════ -->
+<doc-claim>
+  <p>装上插件后，游戏里的文本显示中文，游戏原有文件不改变。</p>
+  <doc-tree caption="只新增文件。卸载就是删掉新增的这几个。">
+<script type="text/plain">
+PUNK Playtest/
+  Punk.exe                      # 未改动
+  Punk_Data/                    # 未改动
+  + winhttp.dll                 # BepInEx 启动器，新增
+  + doorstop_config.ini         # 新增
+  + BepInEx/
+  +   core/                     # BepInEx 本体
+  +   plugins/PunkCn.dll        # 本项目的插件
+</script>
+  </doc-tree>
+  <doc-note tone="info"><strong>未改动</strong> 指内容不变。新增三个顶级项，都能整目录删除。</doc-note>
+
+  <doc-claim>
+    <p>只拦 TMP 文本的 setter。游戏逻辑读到的还是英文。</p>
+    <doc-calls title="文本替换的调用链" caption="点某一行可以看它旁边的代码。">
+<script type="text/plain">
++ **PunkCnPlugin**.Awake()                        @ plugin/PunkCn/Plugin.cs:14
++   **Table**.Load()                               @ plugin/PunkCn/Table.cs:9
++   **FontInstaller**.Install()                    @ plugin/PunkCn/FontInstaller.cs:11
++   **TextPatcher**.Apply()                        @ plugin/PunkCn/TextPatcher.cs:18
++     Harmony.Patch(TMP_Text.set_text)             @ plugin/PunkCn/TextPatcher.cs:24
++     **SceneSweep**.TranslateLoaded()             @ plugin/PunkCn/SceneSweep.cs:12
++   Plugin.Log.LogInfo("汉化已加载")                @ plugin/PunkCn/Plugin.cs:31
+</script>
+    </doc-calls>
+    <doc-note tone="ok"><strong>为什么只拦 setter</strong> 游戏代码用 <code>text</code> 做判断或比较时，拿到的仍是英文。译文不会改变游戏行为。</doc-note>
+
+    <doc-claim at="plugin/PunkCn/TextPatcher.cs:24">
+      <p><b>TextPatcher.cs:24</b> · set_text 的 Prefix</p>
+      <doc-code title="TextPatcher.cs · 草图，尚未实现" lang="csharp" hl="4-7">
+<script type="text/plain">
+[HarmonyPatch(typeof(TMP_Text), "set_text")]
+static class TextPatcher
+{
+    static void Prefix(ref string value)
+    {
+        if (string.IsNullOrEmpty(value)) return;
+        if (Table.TryGet(value, out var cn)) value = cn;   // 查不到就保持英文
+    }
+}
+</script>
+      </doc-code>
+    </doc-claim>
+  </doc-claim>
+
+  <doc-claim>
+    <p>资源里序列化的 606 处文本不走 set_text，所以要额外扫一遍。</p>
+    <doc-note tone="warn"><strong>为什么两条路都要盖</strong> 606 处 TMP 文本序列化在资源里，反序列化时不经过 <code>set_text</code>。物品名与描述由 ScriptableObject 数据在运行时赋给 TMP，才经过 <code>set_text</code>。只做一条会漏掉另一半。</doc-note>
+    <doc-flow caption="资源里有 606 处序列化文本，数据里有 145 组文案。两条通道缺一条就漏一半。">
+<script type="text/plain">
+sa  = 资源文本
+so  = 数据文案
++ sw = 启动扫描
++ st = set_text 补丁
+tmp = 中文显示
+| sa | sw |
+| so | st |
+| .  | tmp |
+sa -> sw : 反序列化后
+so -> st : 运行时赋值
+sw -> tmp : 查表
+st -> tmp : 查表
+</script>
+    </doc-flow>
+    <doc-ask id="timing">
+      <p>文本在哪一步被替换？</p>
+      <label><input type="radio" name="timing" value="lazy" checked> 拦 setter，再加一次启动扫描 <small>覆盖动态文本</small></label>
+      <label><input type="radio" name="timing" value="once"> 只在启动时扫一遍 <small>1.2 的动态部分不成立</small></label>
+      <label><input type="radio" name="timing" value="getter"> 改拦 getter <small>可能影响游戏逻辑</small></label>
+    </doc-ask>
+  </doc-claim>
+
+  <doc-claim>
+    <p>插件挂不上时，游戏照常启动，只是没有中文。</p>
+    <doc-note tone="risk"><strong>已知风险</strong> 游戏用的是 Unity 6000.3.4f1，对新版 BepInEx 的兼容性没有把握。这条兜底必须先验证。</doc-note>
+    <doc-code title="Plugin.cs · 草图，尚未实现" lang="csharp" hl="3-6">
+<script type="text/plain">
+public void Awake()
+{
+    try { Table.Load(); FontInstaller.Install(); TextPatcher.Apply(); }
+    catch (Exception e) { Log.LogError(e); }   // 出错只记日志，游戏继续跑
+}
+</script>
+    </doc-code>
+    <doc-ask id="host">
+      <p>插件宿主怎么选？</p>
+      <label><input type="radio" name="host" value="ladder" checked> 逐级实测：BepInEx 5 → 6 → MelonLoader <small>慢一点，但选到能用的</small></label>
+      <label><input type="radio" name="host" value="be6"> 直接上 BepInEx 6 bleeding edge <small>对 Unity 6 更新，但版本不稳</small></label>
+      <label><input type="radio" name="host" value="be5only"> 只试 BepInEx 5，挂不上再说</label>
+      <label><input type="radio" name="host" value="dll"> 允许兜底改 <code>Punk.Main.dll</code> <small>放弃"不改本体"，卸载变复杂</small></label>
+    </doc-ask>
+  </doc-claim>
+</doc-claim>
+
+<!-- ═════ 2 ═════ -->
+<doc-claim>
+  <p>插件按「英文原文 → 中文」查表替换。查不到就显示英文。</p>
+  <doc-schema id="table" lang="tsv" title="translations/punk.tsv" caption="原文照抄自游戏资源，未改写。标点沿用原文的半角。">
+<script type="text/plain">
+# 三列：稳定编号 / 原文 / 中文。制表符分隔。
+# 编号在条目第一次出现时分配，之后永不改变。
+# 原文列可以变（游戏改了英文），编号不变，译文留在原处等复核。
+0001	Press any button to start	按任意键开始
+0002	Starting a new run deletes your previous one.\nContinue?	开始新的一局会删除当前进度.\n继续?
+0003	SELECT ITEM	选择物品
+0004	WEAPON MODS	武器改装
+0005	VIEW HIGHSCORES	查看排行榜
+0006	Short range explosive shotgun	短程爆炸霰弹枪
+0007	Adds 1 extra projectile to every shot\nbut also makes every shot cost more resource	每次射击多发射 1 枚弹丸,\n但每发的资源消耗也会提高
+0008	Forms a shield around the ship that absorbs incoming\ndamage but you lose <color=#B16623>CAPS</color> every time this happens.	在飞船周围形成护盾,吸收来袭伤害.\n但每次吸收都会损失 <color=#B16623>CAPS</color>.
+# … 其余条目由 tools/extract.py 产出
+</script>
+  </doc-schema>
+  <doc-note tone="ok"><strong>半角标点有额外好处</strong> 主要 UI 字体 <code>8-bit-hud SDF</code> 的字形覆盖正好是 U+0020–007E，半角标点一定有字形，不会掉字。</doc-note>
+  <doc-note tone="info"><strong>查不到的后果</strong> 回退显示英文原文。不填空字符串，不写 <code>[MISSING]</code> 这类标记。显示英文能被接受，显示占位符会被当成 bug。</doc-note>
+
+  <doc-claim>
+    <p>每条文本有一个分配后永不改变的编号。</p>
+    <doc-code title="Table.cs · 草图，尚未实现" lang="csharp" hl="1-5">
+<script type="text/plain">
+// 加载时先建反向索引：归一化原文 → 编号
+static bool TryGet(string src, out string cn)
+{
+    if (!_bySource.TryGetValue(Normalize(src), out var id)) { cn = null; return false; }
+    return _byId.TryGetValue(id, out cn);
+}
+</script>
+    </doc-code>
+    <doc-note tone="info"><strong>编号提高的不是匹配率</strong> 游戏改了英文，运行时照样查不到、照样回退英文。编号的价值在人工这一侧：旧译文不会丢，它挂在原编号上，可以拿来改成新译文。</doc-note>
+    <doc-ask id="key">
+      <p>翻译表用什么做键？</p>
+      <label><input type="radio" name="key" value="text"> 归一化后的英文原文</label>
+      <label><input type="radio" name="key" value="id" checked> 稳定编号 + 原文 <small>旧译文可复用，改过的原文看得见</small></label>
+    </doc-ask>
+  </doc-claim>
+</doc-claim>
+
+<!-- ═════ 3 ═════ -->
+<doc-claim>
+  <p>中文用像素字体显示。像素字体缺字时，那个字回退到黑体。</p>
+  <doc-mock frame="none" w="420" label="同一个设置项，两种字体" caption="左：像素字体（与游戏画风一致）。右：回退黑体（只在缺字时出现）。">
+    <template>
+<div class="ui">
+  <div class="k">Display</div>
+  <div class="row"><span class="px">垂直同步</span><span class="px" style="color:#8a8578">开</span></div>
+  <div class="row"><span class="px">帧率上限</span><span class="px" style="color:#8a8578">200</span></div>
+  <div class="row"><span>垂直同步</span><span style="color:#8a8578">开</span></div>
+  <div class="row"><span>帧率上限</span><span style="color:#8a8578">200</span></div>
+  <div class="k">缺字时</div>
+  <div class="row"><span class="px">能源<span class="blk"></span>耗</span><span class="px" style="color:#8a8578">12</span></div>
+  <div class="row"><small>灰块 = 像素字体没有这个字形，改用黑体渲染该字</small></div>
+</div>
+    </template>
+  </doc-mock>
+  <doc-note tone="warn"><strong>这张图是示意</strong> 字体与布局还没跑进游戏。真实 A/B 截图在字体方案落地后补。</doc-note>
+
+  <doc-claim>
+    <p>游戏自带的 5 个字体资产，一个中文字形都没有。</p>
+    <doc-code title="Punk_Data 里的 TMP_FontAsset · 实测" lang="text">
+<script type="text/plain">
+8-bit-hud SDF                   512²  静态   95 字形  U+0020–007E   ← 主要 UI 字体
+LiberationSans SDF             1024²  静态  250 字形
+LiberationSans SDF - Fallback   512²  动态    0 字形
+Font_Minimum                   1024²  静态   97 字形
+prstartk SDF                   1024²  动态    0 字形   ← Press Start 2P，像素字体
+TMP_Settings.m_fallbackFontAssets = []           ← 空的，加回退不会跟别人冲突
+</script>
+    </doc-code>
+    <doc-note tone="ok"><strong>好消息</strong> 这个 build 已经在用动态图集（两个动态资产），运行时建中文字体资产这条路在本项目成立。</doc-note>
+  </doc-claim>
+
+  <doc-claim>
+    <p>选中的中文字体在 GB2312 全集里一个都不缺。</p>
+    <doc-code title="三款开源中文像素字体 · GB2312 全集实测" lang="text">
+<script type="text/plain">
+                       汉字数   GB2312缺字          文件     判定
+Ark Pixel 12px        18,299   484 (7.16%)     1.11 MB   不可用
+  缺的是 班 搬 餐 概 既 紧 警 这类常用字
+Fusion Pixel 12px     19,219   143 (2.11%)     1.60 MB   可用
+  缺的是 鼗 赝 衮 脔 谘 这类生僻字
+Zpix 12px             20,902     0 (0.00%)     4.46 MB   ← 已选用
+  覆盖整个 U+4E00–9FFF
+</script>
+    </doc-code>
+    <doc-note tone="info"><strong>采样 36px</strong> 即字体原生 12px 的 3 倍。实测字形锐利，与游戏 8-bit HUD 风格一致。</doc-note>
+  </doc-claim>
+
+  <doc-claim>
+    <p>字体在运行时从内嵌的 TTF 生成，不预生成字库图集。</p>
+    <doc-code title="FontInstaller.cs · 已实现，实测通过" lang="csharp" hl="4-7">
+<script type="text/plain">
+// 实测：Unity 6000.3.4 的 OS 字体通道不可用 ——
+//   FontEngine.LoadFontFace(Font, int) 对微软雅黑和 Arial 都返回 Invalid_File_Structure。
+// 可用的只有字节流通道。
+FontEngine.LoadFontFace(ttfBytes, 36);              // 36 = 字体原生 12px 的 3 倍
+var fa = ScriptableObject.CreateInstance<TMP_FontAsset>();
+SetField(fa, "m_FaceInfo", FontEngine.GetFaceInfo());
+SetField(fa, "m_SourceFontFilePath", tempTtfPath);   // 补字形时 TMP 要按路径重载源文件
+InitAtlasState(fa, 1024, 1024);                     // 关键：CreateInstance 不跑 OnEnable
+fa.ReadFontAssetDefinition();
+fa.TryAddCharacters("按任意键开始", out missing);     // 必须 True 且 missing 为空
+TMP_Settings.fallbackFontAssets.Add(fa);
+</script>
+    </doc-code>
+    <doc-note tone="warn"><strong>最容易卡住的一步</strong> <code>CreateInstance</code> 不触发 TMP 的 <code>OnEnable</code>，图集空闲矩形与字形查找表都没建。缺了它们 <code>TryAddCharacters</code> 只在 TMP 内部抛空引用，不告诉你缺哪个字段。手工建出来即解决。</doc-note>
+    <doc-note tone="info"><strong>为什么动态</strong> 中文常用字几千个，预生成图集会让补丁包变大好几倍，而且缺一个就要重做。</doc-note>
+    <doc-note tone="ok"><strong>实测结果</strong> 采样 36px 渲染出来字形锐利，和游戏的 8-bit HUD 风格一致。不需要改 shader 做硬阈值。</doc-note>
+  </doc-claim>
+</doc-claim>
+
+<!-- ═════ 4 ═════ -->
+<doc-claim>
+  <p>一条命令从提取跑到打包。发布前校验会拦下不合格的条目。</p>
+  <doc-mock frame="terminal" title="punk-cn" w="470" label="校验报告的形状" caption="数字在提取脚本跑完后填真实值。这里只固定报告格式。">
+    <template><span class="dim">$</span> python tools/validate.py
+读取 <b>translations/punk.tsv</b>
+<span class="dim">─────────────────────────────</span>
+条目 <span class="b">N</span>   未翻译 <span class="g">N</span>   缺字 <span class="g">N</span>   超长 <span class="g">N</span>   残留英文 <span class="g">N</span>
+标签错位 <span class="g">N</span>   原文已变更 <span class="y">N</span>   全角标点 <span class="g">N</span>
+<span class="g">✓</span> 全部通过，可以打包
+<span class="dim">$</span> python tools/pack_release.py
+<span class="g">✓</span> dist/punk-cn-v0.1.0.zip  <span class="dim">（插件 + 字体 + 安装说明）</span></template>
+  </doc-mock>
+
+  <doc-claim>
+    <p>五支脚本各做一件事，能单独跑。</p>
+    <doc-calls title="工具链" caption="这五支脚本是整个项目的可复用部分。">
+<script type="text/plain">
++ **extract**.py            # 从游戏资源与 DLL 抓出全部玩家可见文本      @ tools/extract.py:1
++ **build_table**.py        # 合并提取结果与已有译文，给新条目分配编号   @ tools/build_table.py:1
++ **validate**.py           # 查七类问题，见 4.2                       @ tools/validate.py:1
++ **review_page**.py        # 生成对照评审页 review.html               @ tools/review_page.py:1
++ **pack_release**.py       # 产出 dist/*.zip 与校验报告               @ tools/pack_release.py:1
+</script>
+    </doc-calls>
+    <doc-ask id="review">
+      <p>你用什么方式校对译文？</p>
+      <label><input type="radio" name="review" value="csv"> 导出 UTF-8 CSV，用 WPS 或 Excel 填译文列</label>
+      <label><input type="radio" name="review" value="html" checked> 生成一张对照评审页，在浏览器里逐条过 <small>可筛待复核，改动导出成 TSV 片段</small></label>
+      <label><input type="radio" name="review" value="tsv"> 直接用 VS Code 改 TSV</label>
+    </doc-ask>
+
+    <doc-claim>
+      <p>评审页能筛出待复核条目，并把改动导出成 TSV 片段。</p>
+      <doc-mock frame="browser" url="review.html" w="440" label="对照评审页" caption="只读，不改文件。改动导出后自己贴回翻译表。">
+        <template>
+<div class="ui">
+  <div class="hd">对照评审 <small>待复核 7</small></div>
+  <div class="bar"><span class="chip">全部</span><span class="chip on">待复核 7</span><span class="chip">原文已变更 3</span><span class="chip">缺译文 4</span></div>
+  <div class="row"><b>0007</b><span class="dim">已译</span><small>Adds 1 extra projectile to every shot</small><small>每次射击多发射 1 枚弹丸,</small></div>
+  <div class="row on"><b>0011</b><span style="color:#b4541f;font-weight:600">原文已变更</span><small>Slow moving missile that locks on to enemies</small><small>缓慢飞行的导弹,锁定敌人</small></div>
+  <div class="row"><b>0012</b><span class="dim">缺译文</span><small>A big bang, then many small bangs after</small><small>—</small></div>
+  <div class="ft"><span class="btn">导出改动为 TSV</span><small class="dim">贴回 translations/punk.tsv</small></div>
+</div>
+        </template>
+      </doc-mock>
+    </doc-claim>
+  </doc-claim>
+
+  <doc-claim>
+    <p>校验拦七类问题：没译文、缺字、超长、仍是英文、标签与换行错位、原文已变更、全角标点。</p>
+    <doc-code title="validate.py · 草图，尚未实现" lang="python">
+<script type="text/plain">
+CHECKS = [
+    ("未翻译",     lambda r: not r.cn),
+    ("缺字",       lambda r: glyphs_missing(r.cn)),            # 像素字体没有这个字形
+    ("超长",       lambda r: len(r.cn) > len(r.en) * 1.2),     # 固定宽度的按钮与标题栏
+    ("残留英文",   lambda r: RE_LATIN.search(r.cn)),
+    ("标签错位",   lambda r: tags(r.en) != tags(r.cn)          # <color=…> 配对
+                          or breaks(r.en) != breaks(r.cn)),    # 写死的 \n 数量
+    ("原文已变更", lambda r: r.seen_en and r.seen_en != r.en),  # 编号还在，英文改了
+    ("全角标点",   lambda r: RE_FULLWIDTH.search(r.cn)),        # 标点沿用原文的半角
+]
+fail = [name for name, fn in CHECKS if any(fn(r) for r in rows)]
+raise SystemExit(f"{len(fail)} 项未通过" if fail else 0)
+</script>
+    </doc-code>
+    <doc-note tone="info"><strong>超长为什么算问题</strong> 中文通常比英文短，但按钮和标题栏是固定宽度。译文比原文长超过 20% 就报警。</doc-note>
+    <doc-note tone="risk"><strong>标签与换行</strong> 原文里有 <code>&lt;color=#D2963D&gt;</code> 这类富文本标签，还有写死的 <code>\n</code>。漏掉一个闭合标签会让整段文字显示成红色，或者把标签原文露出来。换行位置也不能照抄英文。</doc-note>
+    <doc-note tone="warn"><strong>原文已变更怎么处理</strong> 编号还在、英文变了，说明游戏改过这一句。校验把它单列出来，译文不会静默失效。</doc-note>
+  </doc-claim>
+</doc-claim>
+
+<!-- ═════ 5 ═════ -->
+<doc-claim>
+  <p>试玩版更新后，重跑同一套命令就产出新补丁。</p>
+  <doc-machine name="pipe" caption="绿色虚线是新增环节。">
+<script type="text/plain">
+machine pipe initial extracted
+state extracted   # 从新版游戏抓出全部文本。
+state diffed      # 与上一版的表比对。
+state translated  # 新增的串有译文。
+state built     final   # 产出新的 zip。
+
+| extracted | diffed | translated |
+| .         | built  | .          |
+
+extracted  -diff->      diffed     : 比对
+diffed     -new->       translated : 新增串
+diffed     -none->      built      : 无新串
+translated -build->     built      : 校验通过
+</script>
+    <div data-state="extracted"><doc-mock frame="terminal" w="440"><template><span class="dim">$</span> python tools/extract.py
+<span class="g">✓</span> 抓取 <b>N</b> 条，存入 <span class="dim">data/v0.3.4/strings.json</span></template></doc-mock></div>
+    <div data-state="diffed"><doc-mock frame="terminal" w="440"><template><span class="dim">$</span> python tools/build_table.py
+与上一版比对：新增 <span class="y">N</span> 条，消失 <span class="dim">N</span> 条
+<span class="g">✓</span> 现有译文全部命中</template></doc-mock></div>
+    <div data-state="translated"><doc-mock frame="terminal" w="440"><template><span class="dim">$</span> python tools/validate.py
+<span class="r">✗</span> 未翻译 <b>N</b> 条
+<span class="dim">  Weapon.Railgun.Desc</span>
+<span class="dim">  Room.Hive.Entrance</span>
+补齐后重跑。</template></doc-mock></div>
+    <div data-state="built"><doc-mock frame="terminal" w="440"><template><span class="dim">$</span> python tools/pack_release.py
+<span class="g">✓</span> dist/punk-cn-v0.2.0.zip</template></doc-mock></div>
+  </doc-machine>
+
+  <doc-claim>
+    <p>每次提取的结果按游戏版本号分开存，不覆盖上一版。</p>
+    <doc-code title="data/ 目录 · 草图" lang="text">
+<script type="text/plain">
+data/
+  v0.2.4/strings.json      # 旧版提取结果，保留
+  v0.3.4/strings.json      # 新版提取结果
+  inventory.md             # 文本清单，人看的
+translations/punk.tsv      # 唯一的译文表，跨版本累积
+</script>
+    </doc-code>
+  </doc-claim>
+
+  <doc-claim>
+    <p>建表脚本给新条目分配编号，并把上一版没出现的编号标出来。</p>
+    <doc-code title="build_table.py · 草图，尚未实现" lang="python" hl="2-4">
+<script type="text/plain">
+seen = {normalize(s) for s in extracted}
+for row in table:                              # 逐条核对旧表
+    if row.en not in seen:
+        row.status = "未出现"                   # 游戏删了这句，或者改了英文
+for s in extracted:                            # 本次新出现的串
+    if normalize(s) not in by_source:
+        table.append(Row(id=next_id(), en=s, cn="", status="缺译文"))
+        # 编号只增不减，不回收。旧译文靠编号留在表里。
+</script>
+    </doc-code>
+  </doc-claim>
+</doc-claim>
+
+<!-- ═════ 共享 · 不改变 ═════ -->
+<doc-claim aux="shared">
+  <p>共享：文本在哪里，一共有多少。</p>
+  <doc-code title="实测文本清单" lang="text">
+<script type="text/plain">
+收录 946 条 / 去重 507 条
+需翻译（核心玩家可见）      612 条 / 去重 393 条 / 8,408 字符
+   UI 与菜单               316 条 / 去重 168 条 / 2,020 字符
+   物品与模块描述          214 条 / 去重 198 条 / 5,187 字符
+   教程提示                 65 条 / 去重  22 条 /   435 字符
+   剧情对话                 10 条 / 去重   8 条 /   864 字符
+   其他                      7 条 / 去重   2 条 /    32 字符
+最长的一条 427 字符（开场欢迎信，含富文本标签）
+15,460 个 MonoBehaviour 读取失败 0 个
+</script>
+  </doc-code>
+  <doc-note tone="ok"><strong>体量比预想小</strong> 8,408 字符，全部译文合起来不到一万字。工作量的大头在字体与注入，不在翻译。</doc-note>
+  <doc-note tone="risk"><strong>未决风险：商店文案可能来自远程表格</strong> <code>ShopItemsConfig</code> 里存着一个 Google 表格的公开 CSV 地址。如果商店的物品名与描述是运行时从那里拉的，改资源翻不到这部分，本页的范围声明要改。这条正在查。</doc-note>
+  <doc-note tone="warn"><strong>游戏 LOGO 是图片</strong> <code>Canvas/LOGO</code> 上那张 153×39 的 PNG 就是 PUNK 字样。它是游戏里最显眼的英文，属于"图片文字另算"那一档。</doc-note>
+  <doc-note tone="info"><strong>文件</strong> 完整报告在 <code>data/inventory.md</code>，逐条清单在 <code>data/strings_raw.json</code>。</doc-note>
+  <doc-ask id="punct">
+    <p>中文标点用哪一套？</p>
+    <div class="opts-row">
+      <label><input type="radio" name="punct" value="full"> 全角标点，中英文间不加空格</label>
+      <label><input type="radio" name="punct" value="space"> 全角标点，中英文间加空格</label>
+      <label><input type="radio" name="punct" value="keep" checked> 沿用原文标点 <small>半角，像素字体一定有字形</small></label>
+    </div>
+  </doc-ask>
+</doc-claim>
+
+<doc-claim aux="scope">
+  <p>不做：图片里的文字、Steam 页面、游戏菜单里的语言行、正式版迁移。</p>
+  <ul>
+    <li>烤在贴图里的文字（标题、按键提示图）留到后续阶段。</li>
+    <li>Steam 商店页与成就文本不在游戏文件里，改不到。</li>
+    <li>游戏设置菜单不插语言行。插件内部留一个配置文件开关，默认中文。</li>
+    <li>正式版 PUNK 尚未发售，本次不做迁移设计。</li>
+    <li>仓库许可默认：工具链 MIT，译文 CC BY-NC-SA 4.0。要改在评论里说。</li>
+  </ul>
+</doc-claim>
+
+</doc-plan>
+</main>
+</body>
+</html>

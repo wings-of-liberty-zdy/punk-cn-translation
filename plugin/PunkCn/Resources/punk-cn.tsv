@@ -1,0 +1,378 @@
+# PUNK 试玩版汉化表
+# 三列：编号 / 原文 / 中文。制表符分隔。
+# 编号在条目第一次出现时分配，之后永不改变。
+# 原文里的换行写成字面量 \n，制表符写成 \t；中文列同理。
+# 富文本标签（<color=...>、<sprite=...>）原样保留，不翻译。
+# 标点沿用原文的半角。原文里的拼写错误照抄，不要修正。
+# 本文件由 tools/build_table.py 生成，手工改动会在下次运行时保留（按原文匹配）。
+0001	Press any button to start	按任意键开始
+0002	choose\ncontrol type\nto start	选择\n操作方式\n开始
+0003	SELECT\nITEM	选择物品
+0004	ITEM WHEEL	物品轮盘
+0005	WEAPON MODS	武器改装
+0006	USE GADGETS	使用装置
+0007	MAIN MENU	主菜单
+0008	GAME OVER	游戏结束
+0009	SETTINGS	设置
+0010	NEW RUN	新游戏
+0011	PLAY AGAIN	再来一局
+0012	OPEN SHOP	打开商店
+0013	START IN DAILY CHALLANGE MODE	以每日挑战模式开始
+0014	SAVE EXIT TO MAIN MENU	保存并回到主菜单
+0015	Starting a new run deletes your previous one.\nContinue?	开始新的一局会删除当前进度.\n继续?
+0016	Are you sure?\nYour current run will be lost	确定吗?\n当前进度会丢失
+0017	Are you sure\nyou want to exit?	确定要退出吗?
+0018	Open the pause menu for controls	打开暂停菜单查看操作
+0019	PRESS <color=#de8700>E</color> TO OPEN THE <color=#de8700>WEAPON WHEEL</color>	按 <color=#de8700>E</color> 打开<color=#de8700>武器轮盘</color>
+0020	PRESS <color=#de8700>DPAD DOWN</color> TO OPEN THE <color=#de8700>WEAPON WHEEL</color>	按 <color=#de8700>十字键下</color> 打开<color=#de8700>武器轮盘</color>
+0021	DASH\n/ HOLD TO BOOST	冲刺\n/ 长按加速
+0022	Fuel low	FUEL 不足
+0023	SCANNING AREA	正在扫描区域
+0024	THANKS FOR PALYING	感谢游玩
+0025	Short range explosive shotgun	短程爆炸霰弹枪
+0026	Slow moving missile that locks on to\nenemies and ignites on impact	缓慢飞行的导弹,锁定敌人并在命中时点燃
+0027	A big bang, then many small bangs after	先是一声巨响,然后是连绵的小爆炸
+0028	Adds 1 extra projectile to every shot\nbut also makes every shot cost more resource	每次射击多发射 1 枚弹丸,\n但每发的资源消耗也会提高
+0029	Supplies POWER to nearby SLOTS expanding\nthe usable area of module clusters	为附近的插槽供应 POWER,\n扩大模块集群的可用范围
+0030	Forms a shield around the ship that absorbs incoming\ndamage but you lose <color=#009AB4>ELECTRON</color> every time this happens.\nthe greater the damage the more you loose.	在飞船周围形成护盾,吸收来袭伤害.\n但每次吸收都会损失 <color=#009AB4>ELECTRON</color>.\n伤害越高,损失越多.
+0031	BEACON	信标
+0032	Small device that cuts into the ceiling with small explosives	用小型炸药切进天花板的装置
+0033	BOMB	炸弹
+0034	Detonates after 5 seconds	5 秒后引爆
+0035	FUEL GENERATOR	FUEL 生成器
+0036	Deploys a small device that generates <color=#4D79FF>FUEL</color>\nas long as it's not\ndestroyed	部署一个小型装置,\n只要它没被摧毁\n就会生成 <color=#4D79FF>FUEL</color>
+0037	MATCHBOX	火柴盒
+0038	Detonates after 3 seconds igniting stuff around	3 秒后引爆,点燃周围的东西
+0039	Bond	黏合剂
+0040	Chip	芯片
+0041	Fiber	纤维
+0042	Ex	Ex
+0043	Face	脸
+0044	Gland	腺体
+0045	Powerstar	能量星
+0046	Generator	生成器
+0047	Strange Ball	奇怪的球
+0048	IGNITER	点火器
+0049	Shoots low range projectiles downwards.\nProjectile explodes igniting most things inside the blast radius	向下发射短程弹丸.\n弹丸爆炸,点燃爆炸范围内的大部分东西
+0050	VIAL	小瓶
+0051	Drops glass full of hot substance.\nReleasing many burning sub-projectiles on explosion.\nPerfect for starting fires	投下装满高温物质的玻璃瓶.\n爆炸时释放大量燃烧的次级弹丸.\n非常适合用来点火
+0052	COMBAT DRONE	战斗无人机
+0053	Prints drones equipped with\nprojectile weapon	打印无人机,\n装备弹丸武器
+0054	ELECTRIC DRONE	电击无人机
+0055	Prints drones that electrocute\nnearby enemies	打印无人机,\n电击附近敌人
+0056	PHANTOM DRONE	幻影无人机
+0057	Prints advanced drones\nequipped with laser weapon	打印高级无人机,\n装备激光武器
+0058	MISILLE DRONE	导弹无人机
+0059	Prints drones equipped\nwith missile launcher	打印无人机,\n装备导弹发射器
+0060	SUICIDE DRONE	自爆无人机
+0061	Prints drones that explode\non top of enemies	打印无人机,\n在敌人身上爆炸
+0062	CIRCUIT	电路
+0063	Deploys a ring of electrical projectiles	部署一圈电击弹丸
+0064	FIELD GENERATOR	现场生成器
+0065	Generates fuel anywhere you drop it.	在任何地方丢下它都会生成燃料
+0066	AIR MINE	空中地雷
+0067	Deploys explosive floating mines	部署漂浮的爆炸地雷
+0068	MISSILE SURGE	导弹齐射
+0069	Launches a number of explosive missiles in every direcion	向各个方向发射大量爆炸导弹
+0070	TEARDROP	泪滴
+0071	Drops a highly explosive bomb	投下高爆炸弹
+0072	RED EYE	红眼
+0073	ADD BURN	添加燃烧
+0074	Adds burn to every projectile\nas long as you have enough CAPS	为每枚弹丸添加燃烧,\n只要 CAPS 足够
+0075	+1 BURST	+1 连发
+0076	ADD FIRE EXPLOSION	添加火焰爆炸
+0077	Projectiles explode and burn on impact\nas long as you have enough CAPS	弹丸命中时爆炸并燃烧,\n只要 CAPS 足够
+0078	Add Spark	添加电火花
+0079	Projectiles zap nearby enemies on impact\nas long as you have enough ELECTRON	弹丸命中时电击附近敌人,\n只要 ELECTRON 足够
+0080	EXTRA PROJECTILE	额外弹丸
+0081	+ FIRERATE	+ 射速
+0082	Increases weapon fire rate	提高武器射速
+0083	- SPREAD	- 散布
+0084	Decreases projectile spread	降低弹丸散布
+0085	+ PROJECTILE SPEED	+ 弹丸速度
+0086	Projectiles move faster	弹丸移动更快
+0087	ADD GEL EXPLOSION	添加 GEL 爆炸
+0088	Projectiles explode on impact\nas long as you have enough GEL	弹丸命中时爆炸,\n只要 GEL 足够
+0089	+ RANGE	+ 射程
+0090	Projectiles travel further	弹丸射得更远
+0091	ADD TECH EXPLOSION	添加 TECH 爆炸
+0092	Projectiles explode on impact\nas long as you have enough TECH	弹丸命中时爆炸,\n只要 TECH 足够
+0093	ADD EXPLOSION	添加爆炸
+0094	Projectiles explode on impact\nas long as you have enough STAMINA	弹丸命中时爆炸,\n只要 STAMINA 足够
+0095	Crawler	爬行者
+0096	GADGETS	装置
+0097	BOOSTERS	增幅器
+0098	Embedded	内嵌
+0099	UPGRADES	升级
+0100	POWER	POWER
+0101	WEAPONS	武器
+0102	BOOSTER CORE	增幅核心
+0103	Upgrades nearby modules by\nboosting their stats	升级附近的模块,\n提高它们的属性
+0104	POWER CORE	能量核心
+0105	CAPS UP	CAPS 提升
+0106	Increases maximum <color=#B16623>CAPS</color> capacity	提高 <color=#B16623>CAPS</color> 上限
+0107	ELECTRON UP	ELECTRON 提升
+0108	Increases maximum <color=#009AB4>ELECTRON</color> capacity	提高 <color=#009AB4>ELECTRON</color> 上限
+0109	FUEL UP	FUEL 提升
+0110	Increases maximum <color=#4D79FF>FUEL</color> capacity	提高 <color=#4D79FF>FUEL</color> 上限
+0111	HEALTH UP	HEALTH 提升
+0112	Increases maximum <color=#B03B3B>HEALTH</color>	提高 <color=#B03B3B>HEALTH</color> 上限
+0113	GEL UP	GEL 提升
+0114	Increases maximum <color=#B32AAC>GEL</color> capacity	提高 <color=#B32AAC>GEL</color> 上限
+0115	STAMINA UP	STAMINA 提升
+0116	Increases maximum <color=#A8A8A8>STAMINA</color>	提高 <color=#A8A8A8>STAMINA</color> 上限
+0117	TECH UP	TECH 提升
+0118	Increases maximum <color=#5F46A7>TECH</color> capacity	提高 <color=#5F46A7>TECH</color> 上限
+0119	CAPS REGEN	CAPS 回复
+0120	slowly regenerates <color=#B16623>CAPS</color>	缓慢回复 <color=#B16623>CAPS</color>
+0121	HEALTH REGEN	HEALTH 回复
+0122	slowly regenerates <color=#B03B3B>HEALTH</color>	缓慢回复 <color=#B03B3B>HEALTH</color>
+0123	GEL REGEN	GEL 回复
+0124	slowly regenerates <color=#B32AAC>GEL</color>	缓慢回复 <color=#B32AAC>GEL</color>
+0125	STAMINA REGEN	STAMINA 回复
+0126	slowly regenerates <color=#A8A8A8>STAMINA</color>	缓慢回复 <color=#A8A8A8>STAMINA</color>
+0127	TECH REGEN	TECH 回复
+0128	slowly regenerates <color=#5F46A7>TECH</color>	缓慢回复 <color=#5F46A7>TECH</color>
+0129	CAPS SHIELD	CAPS 护盾
+0130	Forms a shield around the ship that absorbs incoming\ndamage but you lose <color=#B16623>CAPS</color> every time this happens.\nthe greater the damage the more you loose.	在飞船周围形成护盾,吸收来袭伤害.\n但每次吸收都会损失 <color=#B16623>CAPS</color>.\n伤害越高,损失越多.
+0131	ELECTRON SHIELD	ELECTRON 护盾
+0132	GEL SHIELD	GEL 护盾
+0133	Forms a shield around the ship that absorbs incoming\ndamage but you lose <color=#B32AAC>GEL</color> every time this happens.\nthe greater the damage the more you loose.	在飞船周围形成护盾,吸收来袭伤害.\n但每次吸收都会损失 <color=#B32AAC>GEL</color>.\n伤害越高,损失越多.
+0134	TECH SHIELD	TECH 护盾
+0135	Forms a shield around the ship that absorbs incoming\ndamage but you lose <color=#5F46A7>TECH</color> every time this happens.\nthe greater the damage the more you loose.	在飞船周围形成护盾,吸收来袭伤害.\n但每次吸收都会损失 <color=#5F46A7>TECH</color>.\n伤害越高,损失越多.
+0136	SHIP	飞船
+0137	FLAME	喷火器
+0138	it's a flamethrower, yes	这是喷火器,没错
+0139	LASER	激光
+0140	LOON	火球
+0141	Slow moving orb that explodes\nwith high burn pontential	缓慢移动的光球,爆炸时\n燃烧潜力极高
+0142	FIRE MISSILE	火焰导弹
+0143	Electron Missile	ELECTRON 导弹
+0144	Zaps nearby enemies units when explodes	爆炸时电击附近的敌方单位
+0145	TOROID	电环
+0146	Zaps nearby enemies until it runs out of charge	电击附近敌人,直到耗尽电量
+0147	ZAPPER	电击器
+0148	Orbs connected by electron arcs	由电子弧连接的光球
+0149	CAN	罐子
+0150	Launches small crystals affected by gravity.\nCrystals exlode on impact.	发射受重力影响的小水晶.\n水晶命中时爆炸.
+0151	CLUSTER CUBE	集束立方
+0152	FLACK	高射炮
+0153	MARBLES	弹珠
+0154	Slow moving explosive projectiles	缓慢移动的爆炸弹丸
+0155	GEL MISSILE	GEL 导弹
+0156	Homing missiles that lock on to\nenemies and explode on impact	追踪导弹,锁定敌人\n并在命中时爆炸
+0157	SHARD	大水晶
+0158	Big crystal with large explosion on impact	命中时产生大爆炸的大块水晶
+0159	DANDELION	蒲公英
+0160	Explodes on impact and releases\na cluster of secondary explosives	命中时爆炸,并释放\n一组次级爆炸物
+0161	BLADES	刀刃
+0162	Piercing projectiles	穿透弹丸
+0163	BOLT	弩箭
+0164	Long range, high damage projectile weapon	远程,高伤害弹丸武器
+0165	DART	追踪导弹
+0166	Small homing missiles that lock on to enemies	锁定敌人的小型追踪导弹
+0167	DEBRIS	残骸
+0168	Small spinning projectiles affected by gravity	受重力影响的小型旋转弹丸
+0169	DISC GUN	圆盘枪
+0170	Short range, high damage spinning discs	短程,高伤害旋转圆盘
+0171	POPPER	爆响枪
+0172	High firerate, basic projectile weapon	高射速,基础弹丸武器
+0173	SHOTGUN	霰弹枪
+0174	Short range projectiles with high spread	短程,高散布弹丸
+0175	WORM	蠕虫
+0176	Shoots lines of tiny projectiles short range	短程发射成串的微小弹丸
+0177	TRAVEL	前往
+0178	Activate	激活
+0179	ACTIVATE	激活
+0180	PICK UP\nSOME STUFF	拾取\n一些东西
+0181	NEW LOCATION ADDED TO MAP	新地点已加入地图
+0182	SCAN	扫描
+0183	SLAYER	杀戮者
+0184	Loadout description	配装描述
+0185	ROCKETEER	火箭手
+0186	THROWER	投掷者
+0187	GUNNER	枪手
+0188	RUSHER	突袭者
+0189	WORMSTER	蠕虫王
+0190	TItle\n	标题\n
+0191	PURPLE REGEN\n	紫色回复\n
+0192	STARTER MONEY	初始资金
+0193	New	新
+0194	Description	描述
+0195	ENCOUNTER	遭遇
+0196	ENCOUNTER ADV.	进阶遭遇
+0197	STATION	空间站
+0198	Dart laser	飞镖激光
+0199	Flame	火焰
+0200	Popper	爆响枪
+0201	Rocket	火箭
+0202	Quick save 1	快速存档 1
+0203	MODULENAME	模块名称
+0204	Toggle global light	切换全局光照
+0205	CONSUMABLE	消耗品
+0206	New Text	新文本
+0207	FUEL LOW	FUEL 不足
+0208	SAVE	保存
+0209	START	开始
+0210	LoAD\n	载入\n
+0211	HELLO AND WELCOME!\n\n\nThank you for playing our game in this relatively <color=#D2963D>early stage</color>!\n\n\nWe are two brothers-in-law who have been working on this game in our free time for many years now.\n\n\nYOur ultimate goal in this version of the game is to find and defeat the <color=#A2372A>4 FINAL BOSSES</color>.\n\n\nHave fun and give us your thoughts on the game\nvia discord!\n\n\n\n\n<color=#684C37>- THE PUNK TEAM</color>\n	你好,欢迎!\n\n\n感谢你在如此<color=#D2963D>早期阶段</color>试玩我们的游戏!\n\n\n我们是两个连襟,利用空闲时间开发这款游戏已经很多年了.\n\n\n本版本中你的最终目标是找到并击败 <color=#A2372A>4 个最终首领</color>.\n\n\n祝你玩得开心,并通过 discord\n告诉我们你的想法!\n\n\n\n\n<color=#684C37>- PUNK 团队</color>\n
+0212	TRY daily challange AGAIN IN	距离再次尝试每日挑战还有
+0213	\n\n\n\nTHANKS FOR PLAYING	\n\n\n\n感谢游玩
+0214	MAP	地图
+0215	VIDEO	视频
+0216	OFF	关
+0217	NEVER	从不
+0218	HOVER	悬停
+0219	USE / PICK UP	使用 / 拾取
+0220	MASTER VOLUME	主音量
+0221	GAMEPLAY	玩法
+0222	AUDIO	音频
+0223	<color=#A49579>P1</color>   GAMEPAD RUMBLE	<color=#A49579>P1</color>   手柄震动
+0224	generating level... 	正在生成关卡... 
+0225	EFFECTS VOLUME	音效音量
+0226	FPS LIMIT	FPS 上限
+0227	PAUSE	暂停
+0228	ON	开
+0229	FLIGHT	飞行
+0230	BACK	返回
+0231	DAMAGE SLOW-MO	受伤慢动作
+0232	CAMERA SWAY	镜头摇晃
+0233	VSYNC	垂直同步
+0234	BORDERLESS	无边框
+0235	MAP / INV	地图 / 背包
+0236	FULLSCREEN	全屏
+0237	RESOLUTION	分辨率
+0238	APPLY	应用
+0239	UNLIMITED	无限
+0240	AIM ASSIST	瞄准辅助
+0241	DEFAULT	默认
+0242	ALWAYS	总是
+0243	MUSIC VOLUME	音乐音量
+0244	<color=#5596DD>P2</color>   GAMEPAD RUMBLE	<color=#5596DD>P2</color>   手柄震动
+0245	USE GADGET	使用装置
+0246	SCREEN MODE	屏幕模式
+0247	CONTINUE	继续
+0248	CO-OP	双人合作
+0249	JOIN OUR DISCORD	加入 Discord
+0250	view highscores	查看排行榜
+0251	SINGLE PLAYER	单人游戏
+0252	WISHLIST NOW!	加入愿望单!
+0253	AIMING	瞄准
+0254	WINDOWED	窗口化
+0255	YES	是
+0256	NO	否
+0257	Select\nloadout	选择\n配装
+0258	COST	费用
+0259	MODULE NAME	模块名称
+0260	PASSIVE MODULE	被动模块
+0261	ASSIGN INPUT	分配输入
+0262	POWER LEVEL: 2	POWER 等级: 2
+0263	P2	P2
+0264	P1	P1
+0265	THIS IS A LONGER DESCRIPTION\nIT CAN BE MULTIPLE LINES\nIN FACT IT PROBABLY WILL BE\nIT CAN ALSO CONTAIN ICONS LIKE THIS 10/232<SPRITE=5>	这是一段较长的描述\n它可以分成多行\n实际上很可能会\n它还能包含这样的图标 10/232<SPRITE=5>
+0266	Forms a shield around the ship that absorbs incoming damage\nbut you loose <color=#009AB4>ELECTRON</color> every time this happens.\nthe greater the damage the more you loose.\n	在飞船周围形成护盾,吸收来袭伤害\n但每次吸收都会损失 <color=#009AB4>ELECTRON</color>.\n伤害越高,损失越多.\n
+0267	SELECT LOCATION\nTO DECODE	选择地点\n进行解码
+0268	UNEQUIP	卸下
+0269	New Text\n\nNew Text\n\nNew Text	新文本\n\n新文本\n\n新文本
+0270	ITEM SHOP	物品商店
+0271	CANCEL	取消
+0272	LOCATOR	定位器
+0273	Intensity	强度
+0274	save and quit	保存并退出
+0275	MAP STATE NAME	地图状态名称
+0276	SHOP	商店
+0277	MODULES	模块
+0278	SELECT	选择
+0279	SCROLL	滚动
+0280	NETWORK LEVEL	网络等级
+0281	RETRY	重试
+0282	Seed	种子
+0283	Update fog to gpu	更新雾效到 GPU
+0284	Simulate fog	模拟雾效
+0285	quit	退出
+0286	VAULT	仓库
+0287	report a bug	报告问题
+0288	DRAG ITEM	拖拽物品
+0289	PAUSED	已暂停
+0290	ITEMS	物品
+0291	Render fog	渲染雾效
+0292	END OF DEMO	试玩版结束
+0293	OPTIONS	选项
+0294	Restart	重新开始
+0295	I SHOP	I 商店
+0296	{0} cells generated in {1} ms	生成了 {0} 个单元格,用时 {1} ms
+0297	M SHOP	M 商店
+0298	Cannot apply {0} to {1}	无法将 {0} 应用到 {1}
+0299	Discharge	放电
+0300	Cost	费用
+0301	Fire Rate	射速
+0302	Contact Damage	接触伤害
+0303	Explosion dmg	爆炸伤害
+0304	Explosion radius	爆炸范围
+0305	Consumable	消耗品
+0306	Final bosses killed: {0}/{1}	击杀最终首领: {0}/{1}
+0307	Menu	菜单
+0308	Loading leaderboard: 	正在加载排行榜: 
+0309	Uploading score to 	正在上传分数到 
+0310	PICK UP\n<color=#ffc600>	拾取\n<color=#ffc600>
+0311	Effectiveness: {0}%	效能: {0}%
+0312	Discharge damage	放电伤害
+0313	Discharge chain length	放电链长度
+0314	Explosion damage	爆炸伤害
+0315	Burst Size	连发数量
+0316	Burst Delay	连发间隔
+0317	Projectile Count	弹丸数量
+0318	Spread	散布
+0319	Angle Variance	角度偏差
+0320	Angle Offset	角度偏移
+0321	Knockback Force	击退力度
+0322	Range	射程
+0323	Speed	速度
+0324	Damage	伤害
+0325	Failed to load	加载失败
+0326	Leaderboard entries downloaded	排行榜条目已下载
+0327	Upload failed	上传失败
+0328	Score uplaoded	分数已上传
+0329	Failed to load leaderboard	加载排行榜失败
+0330	Interact	交互
+0331	Station	空间站
+0332	Navigate	导航
+0333	Select	选择
+0334	Cancel	取消
+0335	Selection	选中项
+0336	Ship loadout unlocked: 	飞船配装已解锁: 
+0337	Fuel critical	FUEL 严重不足
+0338	Headlights	前照灯
+0339	Respawn on next station unlock	下次空间站解锁时重生
+0340	Fuel	FUEL
+0341	Visible	可见
+0342	NEW LOCATION ADDED	已添加新地点
+0343	Burn level: {0}\n	燃烧等级: {0}\n
+0344	Biome: 	生态区: 
+0345	Interest: {0}\n	趣味度: {0}\n
+0346	Difficulty: {0}\n	难度: {0}\n
+0347	Distance: {0}\n	距离: {0}\n
+0348	Buy	购买
+0349	Offline	离线
+0350	Run duration: {0:hh':'mm':'ss}\n	一局时长: {0:hh':'mm':'ss}\n
+0351	Stations unlocked: {0}\n	已解锁空间站: {0}\n
+0352	Enemies killed: {0}\n	击杀敌人: {0}\n
+0353	Final bosses killed: {0}/4\n	击杀最终首领: {0}/4\n
+0354	Total deaths: {0}\n	总死亡数: {0}\n
+0355	Seed: {0}\nGame version: {1}	种子: {0}\n游戏版本: {1}
+0356	Highlighted	已高亮
+0357	Connected	已连接
+0358	Shop	商店
+0359	Unequip	卸下
+0360	Incompatible slot	插槽不兼容
+0361	Incompatible connections	连接不兼容
+0362	Incompatible augmentation	增幅不兼容
+0363	Unknown error	未知错误
+0364	Powered	已供电
+0365	COST PER PROJECTILE	每发弹丸费用
+0366	ATTACHED POWER CORES: {0} / {1}	已装配能量核心: {0} / {1}
+0367	MAX POWER CORES: {0}	最大能量核心: {0}
+0368	Game does not work	游戏无法运行
+0369	Success! {0}	成功! {0}
+0370	{0} FPS	{0} FPS
+0371	Duration: 	时长: 
