@@ -19,28 +19,28 @@
 0012	OPEN SHOP	打开商店
 0013	START IN DAILY CHALLANGE MODE	以每日挑战模式开始
 0014	SAVE EXIT TO MAIN MENU	保存并回到主菜单
-0015	Starting a new run deletes your previous one.\nContinue?	开始新的一局会删除当前进度.\n继续?
-0016	Are you sure?\nYour current run will be lost	确定吗?\n当前进度会丢失
+0015	Starting a new run deletes your previous one.\nContinue?	开始新的一局会删除当前进度.继续?
+0016	Are you sure?\nYour current run will be lost	确定吗?当前进度会丢失
 0017	Are you sure\nyou want to exit?	确定要退出吗?
 0018	Open the pause menu for controls	打开暂停菜单查看操作
 0019	PRESS <color=#de8700>E</color> TO OPEN THE <color=#de8700>WEAPON WHEEL</color>	按 <color=#de8700>E</color> 打开<color=#de8700>武器轮盘</color>
 0020	PRESS <color=#de8700>DPAD DOWN</color> TO OPEN THE <color=#de8700>WEAPON WHEEL</color>	按 <color=#de8700>十字键下</color> 打开<color=#de8700>武器轮盘</color>
-0021	DASH\n/ HOLD TO BOOST	冲刺\n/ 长按加速
+0021	DASH\n/ HOLD TO BOOST	冲刺/ 长按加速
 0022	Fuel low	FUEL 不足
 0023	SCANNING AREA	正在扫描区域
 0024	THANKS FOR PALYING	感谢游玩
 0025	Short range explosive shotgun	短程爆炸霰弹枪
 0026	Slow moving missile that locks on to\nenemies and ignites on impact	缓慢飞行的导弹,锁定敌人并在命中时点燃
 0027	A big bang, then many small bangs after	先是一声巨响,然后是连绵的小爆炸
-0028	Adds 1 extra projectile to every shot\nbut also makes every shot cost more resource	每次射击多发射 1 枚弹丸,\n但每发的资源消耗也会提高
-0029	Supplies POWER to nearby SLOTS expanding\nthe usable area of module clusters	为附近的插槽供应 POWER,\n扩大模块集群的可用范围
-0030	Forms a shield around the ship that absorbs incoming\ndamage but you lose <color=#009AB4>ELECTRON</color> every time this happens.\nthe greater the damage the more you loose.	在飞船周围形成护盾,吸收来袭伤害.\n但每次吸收都会损失 <color=#009AB4>ELECTRON</color>.\n伤害越高,损失越多.
+0028	Adds 1 extra projectile to every shot\nbut also makes every shot cost more resource	每次射击多发射 1 枚弹丸,但每发的资源消耗也会提高
+0029	Supplies POWER to nearby SLOTS expanding\nthe usable area of module clusters	为附近的插槽供应 POWER,扩大模块集群的可用范围
+0030	Forms a shield around the ship that absorbs incoming\ndamage but you lose <color=#009AB4>ELECTRON</color> every time this happens.\nthe greater the damage the more you loose.	在飞船周围形成护盾,吸收来袭伤害.但每次吸收都会损失 <color=#009AB4>ELECTRON</color>.伤害越高,损失越多.
 0031	BEACON	信标
 0032	Small device that cuts into the ceiling with small explosives	用小型炸药切进天花板的装置
 0033	BOMB	炸弹
 0034	Detonates after 5 seconds	5 秒后引爆
 0035	FUEL GENERATOR	FUEL 生成器
-0036	Deploys a small device that generates <color=#4D79FF>FUEL</color>\nas long as it's not\ndestroyed	部署一个小型装置,\n只要它没被摧毁\n就会生成 <color=#4D79FF>FUEL</color>
+0036	Deploys a small device that generates <color=#4D79FF>FUEL</color>\nas long as it's not\ndestroyed	部署一个小型装置,只要它没被摧毁就会生成 <color=#4D79FF>FUEL</color>
 0037	MATCHBOX	火柴盒
 0038	Detonates after 3 seconds igniting stuff around	3 秒后引爆,点燃周围的东西
 0039	Bond	黏合剂
@@ -53,19 +53,19 @@
 0046	Generator	生成器
 0047	Strange Ball	奇怪的球
 0048	IGNITER	点火器
-0049	Shoots low range projectiles downwards.\nProjectile explodes igniting most things inside the blast radius	向下发射短程弹丸.\n弹丸爆炸,点燃爆炸范围内的大部分东西
+0049	Shoots low range projectiles downwards.\nProjectile explodes igniting most things inside the blast radius	向下发射短程弹丸.弹丸爆炸,点燃爆炸范围内的大部分东西
 0050	VIAL	小瓶
-0051	Drops glass full of hot substance.\nReleasing many burning sub-projectiles on explosion.\nPerfect for starting fires	投下装满高温物质的玻璃瓶.\n爆炸时释放大量燃烧的次级弹丸.\n非常适合用来点火
+0051	Drops glass full of hot substance.\nReleasing many burning sub-projectiles on explosion.\nPerfect for starting fires	投下装满高温物质的玻璃瓶.爆炸时释放大量燃烧的次级弹丸.非常适合用来点火
 0052	COMBAT DRONE	战斗无人机
-0053	Prints drones equipped with\nprojectile weapon	打印无人机,\n装备弹丸武器
+0053	Prints drones equipped with\nprojectile weapon	打印无人机,装备弹丸武器
 0054	ELECTRIC DRONE	电击无人机
-0055	Prints drones that electrocute\nnearby enemies	打印无人机,\n电击附近敌人
+0055	Prints drones that electrocute\nnearby enemies	打印无人机,电击附近敌人
 0056	PHANTOM DRONE	幻影无人机
-0057	Prints advanced drones\nequipped with laser weapon	打印高级无人机,\n装备激光武器
+0057	Prints advanced drones\nequipped with laser weapon	打印高级无人机,装备激光武器
 0058	MISILLE DRONE	导弹无人机
-0059	Prints drones equipped\nwith missile launcher	打印无人机,\n装备导弹发射器
+0059	Prints drones equipped\nwith missile launcher	打印无人机,装备导弹发射器
 0060	SUICIDE DRONE	自爆无人机
-0061	Prints drones that explode\non top of enemies	打印无人机,\n在敌人身上爆炸
+0061	Prints drones that explode\non top of enemies	打印无人机,在敌人身上爆炸
 0062	CIRCUIT	电路
 0063	Deploys a ring of electrical projectiles	部署一圈电击弹丸
 0064	FIELD GENERATOR	现场生成器
@@ -78,12 +78,12 @@
 0071	Drops a highly explosive bomb	投下高爆炸弹
 0072	RED EYE	红眼
 0073	ADD BURN	添加燃烧
-0074	Adds burn to every projectile\nas long as you have enough CAPS	为每枚弹丸添加燃烧,\n只要 CAPS 足够
+0074	Adds burn to every projectile\nas long as you have enough CAPS	为每枚弹丸添加燃烧,只要 CAPS 足够
 0075	+1 BURST	+1 连发
 0076	ADD FIRE EXPLOSION	添加火焰爆炸
-0077	Projectiles explode and burn on impact\nas long as you have enough CAPS	弹丸命中时爆炸并燃烧,\n只要 CAPS 足够
+0077	Projectiles explode and burn on impact\nas long as you have enough CAPS	弹丸命中时爆炸并燃烧,只要 CAPS 足够
 0078	Add Spark	添加电火花
-0079	Projectiles zap nearby enemies on impact\nas long as you have enough ELECTRON	弹丸命中时电击附近敌人,\n只要 ELECTRON 足够
+0079	Projectiles zap nearby enemies on impact\nas long as you have enough ELECTRON	弹丸命中时电击附近敌人,只要 ELECTRON 足够
 0080	EXTRA PROJECTILE	额外弹丸
 0081	+ FIRERATE	+ 射速
 0082	Increases weapon fire rate	提高武器射速
@@ -92,13 +92,13 @@
 0085	+ PROJECTILE SPEED	+ 弹丸速度
 0086	Projectiles move faster	弹丸移动更快
 0087	ADD GEL EXPLOSION	添加 GEL 爆炸
-0088	Projectiles explode on impact\nas long as you have enough GEL	弹丸命中时爆炸,\n只要 GEL 足够
+0088	Projectiles explode on impact\nas long as you have enough GEL	弹丸命中时爆炸,只要 GEL 足够
 0089	+ RANGE	+ 射程
 0090	Projectiles travel further	弹丸射得更远
 0091	ADD TECH EXPLOSION	添加 TECH 爆炸
-0092	Projectiles explode on impact\nas long as you have enough TECH	弹丸命中时爆炸,\n只要 TECH 足够
+0092	Projectiles explode on impact\nas long as you have enough TECH	弹丸命中时爆炸,只要 TECH 足够
 0093	ADD EXPLOSION	添加爆炸
-0094	Projectiles explode on impact\nas long as you have enough STAMINA	弹丸命中时爆炸,\n只要 STAMINA 足够
+0094	Projectiles explode on impact\nas long as you have enough STAMINA	弹丸命中时爆炸,只要 STAMINA 足够
 0095	Crawler	爬行者
 0096	GADGETS	装置
 0097	BOOSTERS	增幅器
@@ -107,7 +107,7 @@
 0100	POWER	POWER
 0101	WEAPONS	武器
 0102	BOOSTER CORE	增幅核心
-0103	Upgrades nearby modules by\nboosting their stats	升级附近的模块,\n提高它们的属性
+0103	Upgrades nearby modules by\nboosting their stats	升级附近的模块,提高它们的属性
 0104	POWER CORE	能量核心
 0105	CAPS UP	CAPS 提升
 0106	Increases maximum <color=#B16623>CAPS</color> capacity	提高 <color=#B16623>CAPS</color> 上限
@@ -134,18 +134,18 @@
 0127	TECH REGEN	TECH 回复
 0128	slowly regenerates <color=#5F46A7>TECH</color>	缓慢回复 <color=#5F46A7>TECH</color>
 0129	CAPS SHIELD	CAPS 护盾
-0130	Forms a shield around the ship that absorbs incoming\ndamage but you lose <color=#B16623>CAPS</color> every time this happens.\nthe greater the damage the more you loose.	在飞船周围形成护盾,吸收来袭伤害.\n但每次吸收都会损失 <color=#B16623>CAPS</color>.\n伤害越高,损失越多.
+0130	Forms a shield around the ship that absorbs incoming\ndamage but you lose <color=#B16623>CAPS</color> every time this happens.\nthe greater the damage the more you loose.	在飞船周围形成护盾,吸收来袭伤害.但每次吸收都会损失 <color=#B16623>CAPS</color>.伤害越高,损失越多.
 0131	ELECTRON SHIELD	ELECTRON 护盾
 0132	GEL SHIELD	GEL 护盾
-0133	Forms a shield around the ship that absorbs incoming\ndamage but you lose <color=#B32AAC>GEL</color> every time this happens.\nthe greater the damage the more you loose.	在飞船周围形成护盾,吸收来袭伤害.\n但每次吸收都会损失 <color=#B32AAC>GEL</color>.\n伤害越高,损失越多.
+0133	Forms a shield around the ship that absorbs incoming\ndamage but you lose <color=#B32AAC>GEL</color> every time this happens.\nthe greater the damage the more you loose.	在飞船周围形成护盾,吸收来袭伤害.但每次吸收都会损失 <color=#B32AAC>GEL</color>.伤害越高,损失越多.
 0134	TECH SHIELD	TECH 护盾
-0135	Forms a shield around the ship that absorbs incoming\ndamage but you lose <color=#5F46A7>TECH</color> every time this happens.\nthe greater the damage the more you loose.	在飞船周围形成护盾,吸收来袭伤害.\n但每次吸收都会损失 <color=#5F46A7>TECH</color>.\n伤害越高,损失越多.
+0135	Forms a shield around the ship that absorbs incoming\ndamage but you lose <color=#5F46A7>TECH</color> every time this happens.\nthe greater the damage the more you loose.	在飞船周围形成护盾,吸收来袭伤害.但每次吸收都会损失 <color=#5F46A7>TECH</color>.伤害越高,损失越多.
 0136	SHIP	飞船
 0137	FLAME	喷火器
 0138	it's a flamethrower, yes	这是喷火器,没错
 0139	LASER	激光
 0140	LOON	火球
-0141	Slow moving orb that explodes\nwith high burn pontential	缓慢移动的光球,爆炸时\n燃烧潜力极高
+0141	Slow moving orb that explodes\nwith high burn pontential	缓慢移动的光球,爆炸时燃烧潜力极高
 0142	FIRE MISSILE	火焰导弹
 0143	Electron Missile	ELECTRON 导弹
 0144	Zaps nearby enemies units when explodes	爆炸时电击附近的敌方单位
@@ -154,17 +154,17 @@
 0147	ZAPPER	电击器
 0148	Orbs connected by electron arcs	由电子弧连接的光球
 0149	CAN	罐子
-0150	Launches small crystals affected by gravity.\nCrystals exlode on impact.	发射受重力影响的小水晶.\n水晶命中时爆炸.
+0150	Launches small crystals affected by gravity.\nCrystals exlode on impact.	发射受重力影响的小水晶.水晶命中时爆炸.
 0151	CLUSTER CUBE	集束立方
 0152	FLACK	高射炮
 0153	MARBLES	弹珠
 0154	Slow moving explosive projectiles	缓慢移动的爆炸弹丸
 0155	GEL MISSILE	GEL 导弹
-0156	Homing missiles that lock on to\nenemies and explode on impact	追踪导弹,锁定敌人\n并在命中时爆炸
+0156	Homing missiles that lock on to\nenemies and explode on impact	追踪导弹,锁定敌人并在命中时爆炸
 0157	SHARD	大水晶
 0158	Big crystal with large explosion on impact	命中时产生大爆炸的大块水晶
 0159	DANDELION	蒲公英
-0160	Explodes on impact and releases\na cluster of secondary explosives	命中时爆炸,并释放\n一组次级爆炸物
+0160	Explodes on impact and releases\na cluster of secondary explosives	命中时爆炸,并释放一组次级爆炸物
 0161	BLADES	刀刃
 0162	Piercing projectiles	穿透弹丸
 0163	BOLT	弩箭
@@ -269,8 +269,8 @@
 0262	POWER LEVEL: 2	POWER 等级: 2
 0263	P2	P2
 0264	P1	P1
-0265	THIS IS A LONGER DESCRIPTION\nIT CAN BE MULTIPLE LINES\nIN FACT IT PROBABLY WILL BE\nIT CAN ALSO CONTAIN ICONS LIKE THIS 10/232<SPRITE=5>	这是一段较长的描述\n它可以分成多行\n实际上很可能会\n它还能包含这样的图标 10/232<SPRITE=5>
-0266	Forms a shield around the ship that absorbs incoming damage\nbut you loose <color=#009AB4>ELECTRON</color> every time this happens.\nthe greater the damage the more you loose.\n	在飞船周围形成护盾,吸收来袭伤害\n但每次吸收都会损失 <color=#009AB4>ELECTRON</color>.\n伤害越高,损失越多.\n
+0265	THIS IS A LONGER DESCRIPTION\nIT CAN BE MULTIPLE LINES\nIN FACT IT PROBABLY WILL BE\nIT CAN ALSO CONTAIN ICONS LIKE THIS 10/232<SPRITE=5>	这是一段较长的描述它可以分成多行实际上很可能会它还能包含这样的图标 10/232<SPRITE=5>
+0266	Forms a shield around the ship that absorbs incoming damage\nbut you loose <color=#009AB4>ELECTRON</color> every time this happens.\nthe greater the damage the more you loose.\n	在飞船周围形成护盾,吸收来袭伤害但每次吸收都会损失 <color=#009AB4>ELECTRON</color>.伤害越高,损失越多.
 0267	SELECT LOCATION\nTO DECODE	选择地点\n进行解码
 0268	UNEQUIP	卸下
 0269	New Text\n\nNew Text\n\nNew Text	新文本\n\n新文本\n\n新文本
@@ -314,7 +314,7 @@
 0307	Menu	菜单
 0308	Loading leaderboard: 	正在加载排行榜: 
 0309	Uploading score to 	正在上传分数到 
-0310	PICK UP\n<color=#ffc600>	拾取\n<color=#ffc600>
+0310	PICK UP\n<color=#ffc600>	拾取<color=#ffc600>
 0311	Effectiveness: {0}%	效能: {0}%
 0312	Discharge damage	放电伤害
 0313	Discharge chain length	放电链长度
@@ -359,7 +359,7 @@
 0352	Enemies killed: {0}\n	击杀敌人: {0}\n
 0353	Final bosses killed: {0}/4\n	击杀最终首领: {0}/4\n
 0354	Total deaths: {0}\n	总死亡数: {0}\n
-0355	Seed: {0}\nGame version: {1}	种子: {0}\n游戏版本: {1}
+0355	Seed: {0}\nGame version: {1}	种子: {0}游戏版本: {1}
 0356	Highlighted	已高亮
 0357	Connected	已连接
 0358	Shop	商店

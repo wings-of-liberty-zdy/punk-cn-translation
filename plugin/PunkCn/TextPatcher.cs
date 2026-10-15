@@ -87,27 +87,50 @@ namespace PunkCn
         private static readonly System.Collections.Generic.HashSet<string> Logged =
             new System.Collections.Generic.HashSet<string>();
 
+        /// <summary>
+        /// 记住每条文本**原本**用的字体的 pointSize。
+        ///
+        /// 为什么必须记：我们一旦把 t.font 换成自己的资产，原字体信息就丢了。
+        /// 之后游戏再给同一个元素赋一次值，就会读到自己资产的 pointSize（38），
+        /// 于是原本是 Font_Minimum(50) 的元素被错当成 38 —— 实测日志里出现过
+        /// 「原=PunkCn CJK 38 ... 文本=前往」，而「前往」本来是 Font_Minimum。
+        ///
+        /// 用 ConditionalWeakTable 而不是 Dictionary：Unity 销毁对象时不会通知我们，
+        /// 用普通字典会一直持有已销毁的 TMP_Text，造成泄漏。
+        /// </summary>
+        private sealed class PointHolder { public float Value; }
+
+        private static readonly System.Runtime.CompilerServices.ConditionalWeakTable<TMP_Text, PointHolder> Originals =
+            new System.Runtime.CompilerServices.ConditionalWeakTable<TMP_Text, PointHolder>();
+
         internal static void Apply(TMP_Text t)
         {
             if (t == null) return;
             if (!FontInstaller.ContainsCjk(t.text)) return;
 
-            float want = FontInstaller.DefaultPointSize;
-            var cur = t.font;
-            string srcName = "?";
-            if (cur != null)
+            PointHolder holder;
+            if (!Originals.TryGetValue(t, out holder))
             {
-                srcName = cur.name;
-                float ps = cur.faceInfo.pointSize;
-                if (ps > 0f) want = ps;
+                holder = new PointHolder { Value = FontInstaller.DefaultPointSize };
+                var cur0 = t.font;
+                if (cur0 != null && !cur0.name.StartsWith("PunkCn CJK"))
+                {
+                    float ps0 = cur0.faceInfo.pointSize;
+                    if (ps0 > 0f) holder.Value = ps0;
+                }
+                Originals.Add(t, holder);
             }
+
+            float want = holder.Value;
+            var cur = t.font;
+            string srcName = cur != null ? cur.name : "?";
 
             var asset = FontInstaller.GetFor(want);
             if (asset == null) return;
 
             // 诊断：同一个「原字体 + 原字号」只记一次，把原字体名、pointSize、
             // 这条文本的 fontSize 和内容片段写进日志 —— 用来定位到底哪个元素需要哪种缩放。
-            if (Logged.Count < 80)
+            if (Logged.Count < 120)
             {
                 string key = srcName + "|" + want + "|" + t.fontSize;
                 if (Logged.Add(key))

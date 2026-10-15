@@ -137,16 +137,28 @@ namespace PunkCn
             /// capLine/pointSize = 1.21，真实字体不可能有 1.21 em 的字母高度）。
             ///
             /// 实测（原版 vs 我们，同一个元素、同一个 fontSize）：
-            ///   Font_Minimum（配装界面 BACK）  原版 9px  / 我们 19px  -> 0.47
             ///   8-bit-hud（配装卡片武器名）    原版 9px  / 我们 8px   -> 1.13
-            /// </summary>
+            ///   Font_Minimum（配装界面 BACK）  原版 9px  / 我们 19px  -> 0.47
+            ///
+            /// ⚠️ 这两个数字后来都被用户实测推翻了，各自上调：
+            ///
+            ///  · **8-bit-hud 1.13 -> 1.28**：「中文字整体偏小」。这条是游戏内 HUD
+            ///    与模块名的主力字体，字号只有 11.8~14（见日志「字体诊断」行），
+            ///    在这个尺寸下 12% 的差距、加上汉字笔画比拉丁字母细，观感更明显。
+            ///
+            ///  · **Font_Minimum 0.47 -> 0.90**：截图并排对比发现，游戏内 HUD 提示
+            ///    （`OPEN SHOP` / `TRAVEL` / `MAP` / `USE GADGET`，全部挂在 pid=293
+            ///    = Font_Minimum 下）的中文只有英文的一半高，右对齐后左边空出一大块，
+            ///    看起来像「F 和文字之间多了个空格」。
+            ///    0.47 是从配装界面 BACK 一个元素量出来的，**一个元素不能代表整个字体** ——
+            ///    这是本项目第二次踩「按字体资产一刀切」的坑。
             public float scale;
         }
 
         private static readonly Dictionary<int, SrcMetrics> SrcByPoint = new Dictionary<int, SrcMetrics>
         {
-            { 38, new SrcMetrics { ascent = 1.40f, descent = -0.20f, line = 1.60f, mean = 1.00f, tab = 0.605f, scale = 1.13f } },
-            { 50, new SrcMetrics { ascent = 0.67f, descent = -0.27f, line = 0.94f, mean = 0.32f, tab = 0.46f, scale = 0.47f } },
+            { 38, new SrcMetrics { ascent = 1.40f, descent = -0.20f, line = 1.60f, mean = 1.00f, tab = 0.605f, scale = 1.28f } },
+            { 50, new SrcMetrics { ascent = 0.67f, descent = -0.27f, line = 0.94f, mean = 0.32f, tab = 0.46f, scale = 0.90f } },
             { 86, new SrcMetrics { ascent = 0.91f, descent = -0.24f, line = 1.15f, mean = 0.52f, tab = 0.53f, scale = 1.00f } },
             { 90, new SrcMetrics { ascent = 0.88f, descent = -0.12f, line = 1.00f, mean = 0.63f, tab = 0.51f, scale = 1.00f } },
         };
