@@ -140,28 +140,39 @@ namespace PunkCn
             ///   8-bit-hud（配装卡片武器名）    原版 9px  / 我们 8px   -> 1.13
             ///   Font_Minimum（配装界面 BACK）  原版 9px  / 我们 19px  -> 0.47
             ///
-            /// ⚠️ 这两个数字后来都被用户实测推翻了，各自上调：
+            /// ⚠️ 这两个数字后来被用户实测反复推翻，最终定为：
             ///
-            ///  · **8-bit-hud 1.13 -> 1.28**：「中文字整体偏小」。这条是游戏内 HUD
-            ///    与模块名的主力字体，字号只有 11.8~14（见日志「字体诊断」行），
-            ///    在这个尺寸下 12% 的差距、加上汉字笔画比拉丁字母细，观感更明显。
+            ///   **8-bit-hud  1.13 -> 1.28 -> 1.45**
+            ///   **Font_Minimum 0.47 -> 0.90 -> 1.05**
             ///
-            ///  · **Font_Minimum 0.47 -> 0.90**：截图并排对比发现，游戏内 HUD 提示
-            ///    （`OPEN SHOP` / `TRAVEL` / `MAP` / `USE GADGET`，全部挂在 pid=293
-            ///    = Font_Minimum 下）的中文只有英文的一半高，右对齐后左边空出一大块，
-            ///    看起来像「F 和文字之间多了个空格」。
-            ///    0.47 是从配装界面 BACK 一个元素量出来的，**一个元素不能代表整个字体** ——
-            ///    这是本项目第二次踩「按字体资产一刀切」的坑。
+            ///  · 8-bit-hud 是游戏内 HUD、模块名、商店物品名的主力字体，字号只有 11.8~14。
+            ///  · Font_Minimum 承担 HUD 提示（`OPEN SHOP` / `TRAVEL` / `MAP` / `USE GADGET`，
+            ///    都在 pid=293 下）。0.47 只从配装界面 BACK 一个元素量出来，
+            ///    导致中文只有英文一半高，右对齐后左边空一块，看着像「多了个空格」。
+            ///
+            /// ★ 关键认识：**数学上「汉字字面高 = 英文字母高」并不等于观感一致。**
+            ///   8-bit-hud 的 capLine/pointSize = 1.21，所以 0.917 × scale = 1.21 ⇒ scale = 1.32
+            ///   才是等高。但汉字笔画密、小字号下糊成一团，观感会比同高的拉丁字母小，
+            ///   实际要放到 1.45（约等于英文字母高的 1.1 倍）才顺眼。
+            ///   这是游戏本地化的通行做法：CJK 通常比被替换的拉丁字号略大。
             public float scale;
         }
 
         private static readonly Dictionary<int, SrcMetrics> SrcByPoint = new Dictionary<int, SrcMetrics>
         {
-            { 38, new SrcMetrics { ascent = 1.40f, descent = -0.20f, line = 1.60f, mean = 1.00f, tab = 0.605f, scale = 1.28f } },
-            { 50, new SrcMetrics { ascent = 0.67f, descent = -0.27f, line = 0.94f, mean = 0.32f, tab = 0.46f, scale = 0.90f } },
+            { 38, new SrcMetrics { ascent = 1.40f, descent = -0.20f, line = 1.60f, mean = 1.00f, tab = 0.605f, scale = 1.45f } },
+            { 50, new SrcMetrics { ascent = 0.67f, descent = -0.27f, line = 0.94f, mean = 0.32f, tab = 0.46f, scale = 1.05f } },
             { 86, new SrcMetrics { ascent = 0.91f, descent = -0.24f, line = 1.15f, mean = 0.52f, tab = 0.53f, scale = 1.00f } },
             { 90, new SrcMetrics { ascent = 0.88f, descent = -0.12f, line = 1.00f, mean = 0.63f, tab = 0.51f, scale = 1.00f } },
         };
+
+        /// <summary>Fusion Pixel / Zpix 汉字的字面高度与位置（fontTools 量的，unitsPerEm 1200）。</summary>
+        private const float CJK_INK_EM = 0.917f;      // 字面总高
+        private const float CJK_INK_TOP_EM = 0.834f;  // 字面顶端，相对基线
+        private const float CJK_INK_BOTTOM_EM = -0.083f;
+
+        /// <summary>字面之外至少留多少行距，避免多行文本贴在一起。</summary>
+        private const float LINE_SAFETY = 1.25f;
 
         private static void MatchGameLineMetrics(ref FaceInfo fi, int pointSize)
         {
@@ -172,11 +183,30 @@ namespace PunkCn
             float k = pointSize / scale;   // em 值 -> 我们资产里的单位
                                            // （行距 = lineHeight × fontSize/pointSize × scale，要等于 line × fontSize）
 
+            // ★ 行盒必须容得下我们放大后的汉字。
+            //
+            // 源字体的行高不一定够用：Font_Minimum 只有 0.94 em，因为它的字母很矮
+            // （cap 只占 0.32 em），行距可以压得很紧。但汉字字面占 0.917 em，
+            // 缩放 0.90 后是 0.825 em —— 塞进 0.94 em 的行里几乎没有行距，
+            // 启动那封欢迎信的两行话就叠在一起了（用户报的「最后一句话又是两行有重叠」）。
+            //
+            // 取「源字体行高」和「字面高 × 安全系数」的较大者：
+            // 源行高更大时（8-bit-hud 是 1.60 em）保持原样，不影响原版排版；
+            // 只有像 Font_Minimum 这种"矮字体"，才会被我们的汉字撑高。
+            float ink = CJK_INK_EM * scale;
+            float inkTop = CJK_INK_TOP_EM * scale;
+            float lineEm = Math.Max(m.line, ink * LINE_SAFETY);
+
+            // 上伸也要容得下字面顶端，否则字会顶出行盒、与上一行相碰。
+            float ascentEm = Math.Max(m.ascent, inkTop + 0.02f);
+            if (ascentEm > lineEm - 0.05f) ascentEm = lineEm - 0.05f;   // 保住下伸
+            float descentEm = ascentEm - lineEm;
+
             fi.pointSize = pointSize;
             fi.scale = scale;
-            fi.lineHeight = m.line * k;
-            fi.ascentLine = m.ascent * k;
-            fi.descentLine = m.descent * k;
+            fi.lineHeight = lineEm * k;
+            fi.ascentLine = ascentEm * k;
+            fi.descentLine = descentEm * k;
             fi.capLine = m.mean * k;
             fi.meanLine = m.mean * k;
             fi.baseline = 0f;
@@ -185,8 +215,13 @@ namespace PunkCn
             fi.underlineThickness = 0.05f * k;
             fi.strikethroughOffset = m.mean * k;
             fi.strikethroughThickness = 0.05f * k;
-            fi.superscriptOffset = m.ascent * k;
-            fi.subscriptOffset = m.descent * k;
+            fi.superscriptOffset = ascentEm * k;
+            fi.subscriptOffset = descentEm * k;
+
+            if (lineEm > m.line + 0.001f)
+                Plugin.Log.LogInfo("[PunkCn] " + pointSize + "px 行盒被汉字撑高: "
+                                   + m.line.ToString("0.###") + " -> " + lineEm.ToString("0.###") + " em"
+                                   + "（字面 " + ink.ToString("0.###") + " em × " + LINE_SAFETY + "）");
         }
 
         private static TMP_FontAsset MakeAsset(int pointSize)
